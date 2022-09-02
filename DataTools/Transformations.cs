@@ -29,7 +29,7 @@ namespace ExcelReader
             }
             return data;
         }
-        public static string RedactBannedWord(string data)
+        internal static string RedactBannedWord(string data)
         {
             foreach (string BadWord in MyIO.BannedWords)
             {
@@ -40,7 +40,7 @@ namespace ExcelReader
             }
             return data;
         }
-        public static bool ContainsBannedWord(string data)
+        internal static bool ContainsBannedWord(string data)
         {
             foreach (string BadWord in MyIO.BannedWords)
             {

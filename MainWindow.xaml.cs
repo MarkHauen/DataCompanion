@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ExcelReader.DataTools;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,11 +17,10 @@ using static ExcelReader.MyIO;
 
 namespace ExcelReader
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
+        Config currentConfig;
+        
         public MainWindow()
         {
             InitializeComponent();
@@ -29,6 +29,8 @@ namespace ExcelReader
 
         private void InitializeMyComponents()
         {
+            currentConfig = InitializeData();
+            HideInitialComponents();
             PopulateBannedWords();
             PopulateBannedWordPolicies();
         }
@@ -43,18 +45,63 @@ namespace ExcelReader
         private void LoadDoc(object sender, RoutedEventArgs e)
         {
             DataFactory.BuildData(GetFileContents(FileNameTextBox.Text));
+            EnableInitialComponents();
         }
 
         private void TransformDoc(object sender, RoutedEventArgs e)
         {
             Transformations.BannedWordCheck(BannedWordCheck, BannedWordPolicyChoice);
-            
-            WriteToFile(DataFactory.OutputData());
+            WriteToCSV(DataFactory.OutputData());
         }
 
         private void SaveConfig(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void HideInitialComponents()
+        {
+            ChooseConfigLabel.Visibility = Visibility.Hidden;
+            ConfigChoice.Visibility = Visibility.Hidden;
+            SaveConfigButton.Visibility = Visibility.Hidden;
+            SaveConfigNameLabel.Visibility = Visibility.Hidden;
+            SaveConfigNameTextBox.Visibility = Visibility.Hidden;
+            TransformDocButton.Visibility = Visibility.Hidden;
+            ColumnChoiceLabel.Visibility = Visibility.Hidden;
+            ColumnChoice.Visibility = Visibility.Hidden;
+            BannedWordLabel.Visibility = Visibility.Hidden;
+            BannedWordCheck.Visibility = Visibility.Hidden;
+            BannedWordPolicyChoice.Visibility = Visibility.Hidden;
+            MinLengthLabel.Visibility = Visibility.Hidden;
+            MinLengthChoice.Visibility = Visibility.Hidden;
+            MaxLenthLabel.Visibility = Visibility.Hidden;
+            MaxLengthChoice.Visibility = Visibility.Hidden;
+        }
+
+        private void EnableInitialComponents()
+        {
+            ChooseConfigLabel.Visibility = Visibility.Visible;
+            ConfigChoice.Visibility = Visibility.Visible;
+            SaveConfigButton.Visibility = Visibility.Visible;
+            SaveConfigNameLabel.Visibility = Visibility.Visible;
+            SaveConfigNameTextBox.Visibility = Visibility.Visible;
+            TransformDocButton.Visibility = Visibility.Visible;
+            ColumnChoiceLabel.Visibility = Visibility.Visible;
+            ColumnChoice.Visibility = Visibility.Visible;
+            BannedWordLabel.Visibility = Visibility.Visible;
+            BannedWordCheck.Visibility = Visibility.Visible;
+            BannedWordPolicyChoice.Visibility = Visibility.Visible;
+            MinLengthLabel.Visibility = Visibility.Visible;
+            MinLengthChoice.Visibility = Visibility.Visible;
+            MaxLenthLabel.Visibility = Visibility.Visible;
+            MaxLengthChoice.Visibility = Visibility.Visible;
+
+            ConfigChoice.Items.Add(currentConfig.name);
+            ConfigChoice.SelectedIndex = 0;
+            ColumnChoice.ItemsSource = currentConfig.columns;
+            ColumnChoice.SelectedIndex = 0;
+            MaxLengthChoice.Text = currentConfig.maxLengths.ElementAt(0).ToString();
+            MinLengthChoice.Text = currentConfig.minLengths.ElementAt(0).ToString();
         }
     }
 }
