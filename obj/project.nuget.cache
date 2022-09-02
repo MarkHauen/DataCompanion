@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "I1zpq9zdJqmT8WCWZLJMx5LCrZIW9rBEGNH/zdv38e874e4xsW8R5+cG7K0lSQa4ntOZcVvGYwvDmOWmdZmKyw==",
+  "dgSpecHash": "YsNsM2qkAl42VtpSxlTHTrWGYpi+RskK0DL4/OEt0Cv8XhMp1+zF3mzm6sRcoM7PX82OJBQLR+EDQYLmhjjv8A==",
   "success": true,
-  "projectFilePath": "C:\\Users\\markh\\source\\repos\\ExcelReader\\ExcelReader.csproj",
+  "projectFilePath": "C:\\Users\\markh\\source\\repos\\ExcelReader\\DataCompanion.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\markh\\.nuget\\packages\\entityframework\\6.4.4\\entityframework.6.4.4.nupkg.sha512",
     "C:\\Users\\markh\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",

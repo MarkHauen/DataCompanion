@@ -1162,9 +1162,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\markh\\source\\repos\\ExcelReader\\ExcelReader.csproj",
-      "projectName": "ExcelReader",
-      "projectPath": "C:\\Users\\markh\\source\\repos\\ExcelReader\\ExcelReader.csproj",
+      "projectUniqueName": "C:\\Users\\markh\\source\\repos\\ExcelReader\\DataCompanion.csproj",
+      "projectName": "DataCompanion",
+      "projectPath": "C:\\Users\\markh\\source\\repos\\ExcelReader\\DataCompanion.csproj",
       "packagesPath": "C:\\Users\\markh\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\markh\\source\\repos\\ExcelReader\\obj\\",
       "projectStyle": "PackageReference",
