@@ -5,37 +5,59 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ExcelReader"
         mc:Ignorable="d"
-        Title="MainWindow" Height="487" Width="800">
-    <Grid>
-        <Button Name="LoadDocButton" Click="LoadDoc" Content="Load Document" HorizontalAlignment="Left" Margin="60,89,0,0" VerticalAlignment="Top" />
+        Title="Data Transformation Facilitator" Height="350" Width="730">
+    <Grid Margin="0,0,0,0">
 
-        <TextBlock Name="FileNameLabel"  HorizontalAlignment="Left" Margin="169,73,0,0" Text="FileName:" TextWrapping="Wrap" VerticalAlignment="Top"/>
-        <TextBox Name="FileNameTextBox" HorizontalAlignment="Left" Margin="169,89,0,0" Text="test.csv" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Border x:Name="Border2" BorderThickness="1" BorderBrush="Black" HorizontalAlignment="Left" Height="158" Margin="337,73,0,0" VerticalAlignment="Top" Width="344"/>
 
-        <TextBlock Name="ChooseConfigLabel" HorizontalAlignment="Left" Margin="60,130,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="132" Text="Choose Configuration:"/>
-        <ComboBox Name="ConfigChoice" HorizontalAlignment="Left" Margin="60,151,0,0" VerticalAlignment="Top" Width="120"/>
+        <Border x:Name="Border1" BorderThickness="1" BorderBrush="Black" HorizontalAlignment="Left" Height="114" Margin="55,117,0,0" VerticalAlignment="Top" Width="265"/>
 
-        <Button Name="SaveConfigButton" Click="SaveConfig" Content="Save Configuration" HorizontalAlignment="Left" Margin="62,357,0,0" VerticalAlignment="Top"/>
-        <TextBlock Name="SaveConfigNameLabel" HorizontalAlignment="Left" Margin="175,341,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="19" Text="Configuration Name:"/>
-        <TextBox Name="SaveConfigNameTextBox" HorizontalAlignment="Left" Margin="175,358,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Button x:Name="LoadDocButton" Click="LoadDoc" Content="Load Document" HorizontalAlignment="Left" Margin="55,82,0,0" VerticalAlignment="Top" />
 
-        <Button Name="TransformDocButton" Click="TransformDoc" Content="Transform Document" HorizontalAlignment="Left" Margin="62,391,0,0" VerticalAlignment="Top"/>
+        <TextBlock x:Name="FileNameLabel"  HorizontalAlignment="Left" Margin="148,84,0,0" Text="FileName:" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <ComboBox x:Name="FileNameChoice" HorizontalAlignment="Left"  Margin="205,82,0,0" VerticalAlignment="Top" Width="115"/>
 
-        <TextBlock Name="ColumnChoiceLabel" HorizontalAlignment="Left" Margin="353,86,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Text="Column Choice:" />
-        <ComboBox Name="ColumnChoice" HorizontalAlignment="Left" Margin="353,102,0,0" VerticalAlignment="Top" Width="120"/>
 
-        <TextBlock Name="BannedWordLabel" HorizontalAlignment="Left" Margin="542,117,0,0" Text="Banned Word Policy:" TextWrapping="Wrap" VerticalAlignment="Top"/>
-        <CheckBox Name="BannedWordCheck" Content="Enable Banned Word Scan" HorizontalAlignment="Left" Margin="353,139,0,0" VerticalAlignment="Top"/>
-        <ComboBox Name="BannedWordPolicyChoice" HorizontalAlignment="Left" Margin="542,139,0,0" VerticalAlignment="Top" Width="120">
-            <ComboBoxItem Content="Replace"/>
+        <TextBlock x:Name="ChooseConfigLabel" HorizontalAlignment="Left" Margin="62,125,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="132" Text="Choose Configuration:"/>
+        <ComboBox x:Name="ConfigChoice" HorizontalAlignment="Left" Margin="62,143,0,0" VerticalAlignment="Top" Width="120"/>
+
+        <Button x:Name="SaveConfigButton" Click="NewConfig" Content="New Configuration" HorizontalAlignment="Left" Margin="194,172,0,0" VerticalAlignment="Top" Width="119"/>
+        <TextBlock x:Name="SaveConfigNameLabel" HorizontalAlignment="Left" Margin="194,125,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="19" Text="Configuration Name:"/>
+        <TextBox x:Name="SaveConfigNameTextBox" HorizontalAlignment="Left" Margin="194,144,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.5,-0.053"/>
+        <Button x:Name="LoadConfigButton" Click="LoadConfig_Click" Content="Load Configuration" HorizontalAlignment="Left" Margin="62,172,0,0" VerticalAlignment="Top" Width="120"/>
+        <Button x:Name="DeleteConfigButton" Click="DeleteConfig_Click" Content="Delete Configuration" HorizontalAlignment="Left" Margin="194,199,0,0" VerticalAlignment="Top" Width="119"/>
+        <CheckBox x:Name="EnableDeleteCheckbox" Checked="EnableDelete_Checked" Content="Enable Delete" HorizontalAlignment="Left" Margin="63,202,0,0" VerticalAlignment="Top"/>
+
+
+        <Button x:Name="TransformDocButton" Click="TransformDoc" Content="Transform Document" HorizontalAlignment="Center" Margin="0,250,0,0" VerticalAlignment="Top"/>
+
+        <TextBlock x:Name="ColumnChoiceLabel" HorizontalAlignment="Left" Margin="353,86,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Text="Column Choice:" />
+        <ComboBox x:Name="ColumnChoice" HorizontalAlignment="Left" Margin="353,102,0,0" VerticalAlignment="Top" Width="120" DropDownClosed="ColumnChoice_SelectionChanged"/>
+
+        <TextBlock x:Name="BannedWordLabel" HorizontalAlignment="Left" Margin="542,117,0,0" Text="Banned Word Policy:" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <CheckBox x:Name="BannedWordCheck" Content="Enable Banned Word Scan" HorizontalAlignment="Left" Margin="353,139,0,0" VerticalAlignment="Top" Checked="BannedWordCheck_Checked"/>
+        <ComboBox x:Name="BannedWordPolicyChoice" HorizontalAlignment="Left" Margin="542,139,0,0" VerticalAlignment="Top" Width="120" SelectedIndex="0">
+            <ComboBoxItem Content="Redact"/>
             <ComboBoxItem Content="Delete Row"/>
         </ComboBox>
-        
-        <TextBlock Name ="MinLengthLabel" HorizontalAlignment="Left" Margin="353,188,0,0" Text="Minimum Length:" TextWrapping="Wrap" VerticalAlignment="Top"/>
-        <TextBox Name="MinLengthChoice" HorizontalAlignment="Left" Margin="457,188,0,0" Text="0" TextWrapping="Wrap" VerticalAlignment="Top" Width="61"/>
-        
-        <TextBlock Name="MaxLenthLabel" HorizontalAlignment="Left" Margin="353,220,0,0" Text="Maximum Length:" TextWrapping="Wrap" VerticalAlignment="Top"/>
-        <TextBox Name="MaxLengthChoice" HorizontalAlignment="Left" Margin="457,220,0,0" Text="0" TextWrapping="Wrap" VerticalAlignment="Top" Width="61"/>
+
+        <TextBlock x:Name ="MinLengthLabel" HorizontalAlignment="Left" Margin="354,204,0,0" Text="Minimum Length:" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <TextBox x:Name="MinLengthChoice" HorizontalAlignment="Left" Margin="453,205,0,0" Text="0" TextWrapping="Wrap" VerticalAlignment="Top" Width="61" TextChanged="MinLengthChoice_TextChanged"/>
+
+        <TextBlock x:Name="MaxLenthLabel" HorizontalAlignment="Left" Margin="353,178,0,0" Text="Maximum Length:" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <TextBox x:Name="MaxLengthChoice" HorizontalAlignment="Left" Margin="453,178,0,0" Text="0" TextWrapping="Wrap" VerticalAlignment="Top" Width="61" TextChanged="MaxLengthChoice_TextChanged"/>
+
+        <TextBlock x:Name="FillCharLabel" HorizontalAlignment="Left" Margin="542,183,0,0" Text="Fill Character:" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <ComboBox x:Name="FillCharChoice" HorizontalAlignment="Left" Margin="542,201,0,0" VerticalAlignment="Top" Width="120" SelectedIndex="0" DropDownClosed="FillCharChoice_SelectionChanged">
+            <ComboBoxItem Content="X"/>
+            <ComboBoxItem Content="$"/>
+            <ComboBoxItem Content="*"/>
+            <ComboBoxItem Content="#"/>
+            <ComboBoxItem Content="?"/>
+            <ComboBoxItem Content="_"/>
+        </ComboBox>
+        <Image HorizontalAlignment="Left" Height="50" Margin="612,10,0,0" VerticalAlignment="Top" Width="50" Source="/RedLogoNoBack.png"/>
+        <Label Content="Data Transformation Facilitator" HorizontalAlignment="Left" Margin="55,3,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" FontSize="36" Width="564"/>
 
 
 

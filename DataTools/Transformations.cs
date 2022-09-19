@@ -7,17 +7,14 @@ using System.Windows.Controls;
 
 namespace ExcelReader
 {
-    class Transformations
+    internal class Transformations
     {
-        public static string EnsureLengthNotExecded(string data, int maxLength)
+        internal static string EnsureLengthNotExecded(string data, int maxLength)
         {
-            if (data.Length > maxLength)
-            {
-                return data.Substring(0, maxLength);
-            }
-            return data;
+            return data.Length > maxLength ? data.Substring(0, maxLength) : data;
         }
-        public static string EnsureLengthWithFill(string data, int maxLength)
+
+        internal static string EnsureLengthWithFill(string data, int maxLength, string fillChar)
         {
             if (data.Length > maxLength)
             {
@@ -25,26 +22,28 @@ namespace ExcelReader
             }
             while (data.Length != maxLength)
             {
-                data += "0";
+                data += fillChar;
             }
             return data;
         }
+
         internal static string RedactBannedWord(string data)
         {
             foreach (string BadWord in MyIO.BannedWords)
             {
-                if (data == BadWord)
+                if (data == BadWord.Trim())
                 {
                     return "$$BANNEDWORD$$";
                 }
             }
             return data;
         }
+
         internal static bool ContainsBannedWord(string data)
         {
             foreach (string BadWord in MyIO.BannedWords)
             {
-                if (data == BadWord)
+                if (data == BadWord.Trim())
                 {
                     return true;
                 }
@@ -52,20 +51,16 @@ namespace ExcelReader
             return false;
         }
 
-        internal static void BannedWordCheck(CheckBox bannedWordCheck, ComboBox bannedWordPolicyChoice)
+        internal static void BannedWordCheck(ComboBox bannedWordPolicyChoice, int column)
         {
-            if (bannedWordCheck.IsChecked.Value)
+            if (bannedWordPolicyChoice.Text == "Redact")
             {
-                if (bannedWordPolicyChoice.Text == "Replace")
-                {
-                    MyData.RunBannedWordRedact();
-                }
-                else if (bannedWordPolicyChoice.Text == "Delete Row")
-                {
-                    MyData.RunBannedWordRemove();
-                }
-            } 
-            
+                MyData.RunBannedWordRedact(column);
+            }
+            else
+            {
+                MyData.RunBannedWordRemove(column);
+            }
         }
     }
 }

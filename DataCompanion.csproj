@@ -4,6 +4,7 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>net5.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
+    <ApplicationIcon>Logo.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
@@ -21,5 +22,7 @@
   <ItemGroup>
     <PackageReference Include="System.Data.SQLite" Version="1.0.116" />
   </ItemGroup>
+	
+	
 
 </Project>

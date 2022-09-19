@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace ExcelReader
 {
-    public class DataFactory
-    { 
-        public static void BuildData(string inputData)
+    internal class DataFactory
+    {
+        internal static void BuildData(string inputData)
         {
             string[] rows = inputData.Trim().Split("\r\n");
             MyData.data = new List<List<string>> { };
@@ -16,15 +16,15 @@ namespace ExcelReader
             for (int row = 0; row <= (rows.Length - 1); row++)
             {
                 MyData.data.Add(new List<string>(rows[row].Split(",")));
-            }           
+            }
         }
 
-        public static string OutputData()
+        internal static string OutputData()
         {
             string output = "";
             foreach (List<string> row in MyData.data)
             {
-                output += String.Join(",", row) + "\r\n";
+                output += string.Join(",", row) + "\r\n";
             }
             return output;
         }

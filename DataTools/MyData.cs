@@ -1,37 +1,44 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace ExcelReader
 {
-    public static class MyData
+    internal static class MyData
     {
-        public static List<List<string>> data;
+        internal static List<List<string>> data;
 
-        public static void RunBannedWordRedact()
+        internal static void RunBannedWordRedact(int column)
         {
-            for(int row = 0; row < (data.Count - 1); row++)
+            for (int row = 0; row < data.Count; row++)
             {
-                for(int column = 0; column < (data.ElementAt(row).Count - 1); column++)
+                data[row][column] = Transformations.RedactBannedWord(data[row][column]);
+            }
+        }
+
+        internal static void RunBannedWordRemove(int column)
+        {
+            for (int row = 0; row < data.Count; row++)
+            {
+                if (Transformations.ContainsBannedWord(data[row][column]))
                 {
-                    data[row][column] = Transformations.RedactBannedWord(data[row][column]);
+                    data.RemoveAt(row);
+                    break;
                 }
             }
         }
-        public static void RunBannedWordRemove()
+
+        internal static void RunEnsureMinLength(int column, int minLength, string fillChar)
         {
-            for (int row = 0; row < (data.Count - 1); row++)
+            for (int row = 0; row < data.Count; row++)
             {
-                for (int column = 0; column < (data.ElementAt(row).Count - 1); column++)
-                {
-                    if (Transformations.ContainsBannedWord(data[row][column]))
-                    {
-                        data.RemoveAt(row);
-                        break;
-                    }
-                }
+                data[row][column] = Transformations.EnsureLengthWithFill(data[row][column], minLength, fillChar);
+            }
+        }
+
+        internal static void RunEnsureMaxLength(int column, int maxLength)
+        {
+            for (int row = 0; row < data.Count; row++)
+            {
+                data[row][column] = Transformations.EnsureLengthNotExecded(data[row][column], maxLength);
             }
         }
     }
