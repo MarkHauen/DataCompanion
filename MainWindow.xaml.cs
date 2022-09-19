@@ -32,7 +32,7 @@ namespace ExcelReader
             {
                 return;
             }
-            DataFactory.BuildData(GetFileContents($"input\\{FileNameChoice.SelectedItem}"));
+            MyData.BuildData(GetFileContents($"input\\{FileNameChoice.SelectedItem}"));
             EnableConfiguationBox();
         }
 
@@ -79,7 +79,7 @@ namespace ExcelReader
             {
                 MyData.RunEnsureMaxLength(column, GetColumnsMaxLength(ConfigChoice.Text, column.ToString()));
             }
-            WriteToCSV(DataFactory.OutputData());
+            WriteToCSV(MyData.OutputData());
         }
 
         ///////////////////////////////////////////////////
