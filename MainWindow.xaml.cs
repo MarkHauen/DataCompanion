@@ -115,14 +115,7 @@ namespace ExcelReader
 
         private void EnableDelete_Checked(object sender, RoutedEventArgs e)
         {
-            if (DeleteConfigButton.Visibility == Visibility.Hidden)
-            {
-                DeleteConfigButton.Visibility = Visibility.Visible;
-            }
-            else
-            {
-                DeleteConfigButton.Visibility = Visibility.Hidden;
-            }
+            DeleteConfigButton.Visibility = DeleteConfigButton.Visibility == Visibility.Hidden ? Visibility.Visible : Visibility.Hidden;
         }
 
         ///////////////////////////////////////////////////
